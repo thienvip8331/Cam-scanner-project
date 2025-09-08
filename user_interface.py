@@ -60,7 +60,7 @@ class MainApplication(tk.Tk):
     def __init__(self, controller):
         super().__init__()
         self.controller = controller
-        self.title("Ứng dụng Quản lý Sản phẩm | Đọc OCR & Lưu DB (Tối ưu hóa)")
+        self.title("Ứng dụng Quản lý Sản phẩm | Đọc OCR & Lưu DB")
         self.geometry("1280x800")
         self.configure(bg="black")
         self.style = ttk.Style(self)
@@ -109,7 +109,7 @@ class MainApplication(tk.Tk):
 
         ttk.Label(self.extracted_data_tab, text="Thông tin chi tiết sản phẩm:", font=("Arial", 12, 'bold'), style='Grey.TLabel').pack(padx=10, pady=(10, 5), anchor='w')
         self.data_fields = {}
-        field_labels = [("Tên ảnh:", "image_name"), ("Đường dẫn ảnh:", "image_path"), ("Tên sản phẩm:", "product_name"),("NSX Cty:", "manufacturer_company_name"), ("NSX Địa chỉ:", "manufacturer_address"), ("NSX SĐT:", "manufacturer_phone"), ("NK Cty:", "importer_company_name"), ("NK Địa chỉ:", "importer_address"), ("NK SĐT:", "importer_phone"), ("Ngày SX:", "manufacturing_date"), ("Ngày HH:", "expiry_date"), ("Loại SP:", "product_type")]
+        field_labels = [("Tên ảnh:", "image_name"), ("Đường dẫn ảnh:", "image_path"), ("Tên sản phẩm:", "product_name"),("NSX Cty:", "manufacturer_company_name"), ("NSX Địa chỉ:", "manufacturer_address"), ("NSX SĐT:", "manufacturer_phone"), ("Ngày SX:", "manufacturing_date"), ("Ngày HH:", "expiry_date"), ("Loại SP:", "product_type")]
 
         self.scrollable_frame_container = ttk.Frame(self.extracted_data_tab, style='Grey.TFrame')
         self.scrollable_frame_container.pack(fill=tk.BOTH, expand=True, padx=10, pady=5)
@@ -144,10 +144,6 @@ class MainApplication(tk.Tk):
         self.notebook.add(self.saved_products_tab, text="Sản phẩm đã lưu")
 
     def on_canvas_resize(self, event=None):
-        """
-        [SỬA LỖI] Căn chỉnh lại placeholder text hoặc vẽ lại ảnh khi kích thước canvas thay đổi.
-        Hàm này giờ đây có thể xử lý cả sự kiện thực tế (có 'event') và lệnh gọi thủ công (không có 'event').
-        """
         if event:
             # Được gọi bởi sự kiện <Configure> của Tkinter
             width = event.width
@@ -215,7 +211,6 @@ class MainApplication(tk.Tk):
             "image_base64": "",
             "product_name": self.data_fields["product_name"].get(),
             "manufacturer": {"company_name": self.data_fields["manufacturer_company_name"].get(), "address": self.data_fields["manufacturer_address"].get(), "phone": self.data_fields["manufacturer_phone"].get()},
-            "importer": {"company_name": self.data_fields["importer_company_name"].get(), "address": self.data_fields["importer_address"].get(), "phone": self.data_fields["importer_phone"].get()},
             "manufacturing_date": self.data_fields["manufacturing_date"].get(),
             "expiry_date": self.data_fields["expiry_date"].get(),
             "product_type": self.data_fields["product_type"].get(),
